@@ -1,0 +1,11 @@
+apiVersion: enterprise.splunk.com/v1alpha2
+kind: Standalone
+metadata:
+  name: dfsexample
+  finalizers:
+  - enterprise.splunk.com/delete-pvc
+spec:
+  sparkRef:
+    name: example
+  indexerClusterRef:
+    name: example

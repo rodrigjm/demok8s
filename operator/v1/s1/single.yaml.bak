@@ -1,0 +1,25 @@
+apiVersion: enterprise.splunk.com/v1alpha1
+kind: SplunkEnterprise
+metadata:
+  name: s1
+  #  namespace: splunk
+  finalizers:
+    - enterprise.splunk.com/delete-pvc
+spec:
+  storageClassName: nfs-k8s-retain 
+  resources:
+    splunkVarStorage: 20Gi
+    splunkIndexerStorage: 30Gi
+  splunkVolumes:
+  - name: defaults
+    configMap:
+      name: splunk-defaults
+  - name: apps
+    configMap:
+      name: splunk-apps
+  defaultsUrl: /mnt/defaults/default.yml
+  defaults: |-
+    splunk:
+      password: Pl@tano6
+      apps_location:
+        - "/mnt/apps/web.tgz"

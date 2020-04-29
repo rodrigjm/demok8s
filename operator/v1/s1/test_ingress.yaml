@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: splunk-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: cookie
+    #nginx.ingress.kubernetes.io/rewrite-target: / 
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: spark.beepbeepboop.me
+    http:
+      paths:
+      - backend:
+          serviceName: single
+          servicePort: 8000
+  tls:
+  - hosts:
+          #    - sh.beepbeepboop.me
+          #    - hec.beepbeepboop.me
+          #    - cm.beepbeepboop.me
+          #    - spark.beepbeepboop.me
+    secretName: beepbeepboopme-tls

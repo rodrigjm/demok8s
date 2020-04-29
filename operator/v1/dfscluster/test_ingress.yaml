@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: splunk-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/rewrite-target: / 
+    #certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: sh.beepbeepboop.me
+    http:
+      paths: 
+      - backend:
+          serviceName: splunk-dfs-cluster-search-head-service  
+          servicePort: 8000
+  - host: deployer.beepbeepboop.me
+    http:
+      paths:
+      - backend:
+          serviceName: splunk-dfs-cluster-deployer-service
+          servicePort: 8000
+  - host: cm.beepbeepboop.me
+    http:
+      paths:
+      - backend:
+          serviceName: splunk-dfs-cluster-cluster-master-service 
+          servicePort: 8000
+  - host: hec.beepbeepboop.me
+    http:
+      paths:
+      - backend:
+          serviceName: splunk-dfs-cluster-indexer-service 
+          servicePort: 8088
+  - host: spark.beepbeepboop.me
+    http:
+      paths:
+      - backend:
+          serviceName: splunk-dfs-cluster-spark-master-service
+          servicePort: 8009
+          # tls:
+          #  - hosts:
+          #    - sh.beepbeepboop.me
+          #    - hec.beepbeepboop.me
+          #    - cm.beepbeepboop.me
+          #    - spark.beepbeepboop.me
+          #    secretName: beepbeepboop.me-tls

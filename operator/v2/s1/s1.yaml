@@ -1,0 +1,16 @@
+apiVersion: enterprise.splunk.com/v1alpha2
+kind: Standalone
+metadata:
+  name: s1-apps-test
+  finalizers:
+  - enterprise.splunk.com/delete-pvc
+spec:
+  storageClassName: hostpath 
+  volumes:
+    - name: apps
+      configMap:
+        name: splunk-apps
+  defaults: |-
+    splunk:
+      apps_location:
+        - "/mnt/apps/bootstrap.tgz"

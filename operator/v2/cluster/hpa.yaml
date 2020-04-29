@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: idc-example
+spec:
+  scaleTargetRef:
+    apiVersion: enterprise.splunk.com/v1alpha2
+    kind: IndexerCluster
+    name: example
+  minReplicas: 5
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50

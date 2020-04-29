@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-s1-apps
+  #  namespace: splunk
+spec:
+  selector:
+    app.kubernetes.io/component: standalone
+    app.kubernetes.io/instance: splunk-s1-apps-standalone
+    app.kubernetes.io/managed-by: splunk-operator
+    app.kubernetes.io/name: standalone
+    app.kubernetes.io/part-of: splunk-s1-apps-standalone
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+    - name: hec 
+      protocol: TCP
+      port: 8088
+  type: LoadBalancer

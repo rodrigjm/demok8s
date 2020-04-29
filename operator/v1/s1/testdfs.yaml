@@ -1,0 +1,34 @@
+apiVersion: enterprise.splunk.com/v1alpha1
+kind: SplunkEnterprise
+metadata:
+  name: s1
+  #  namespace: splunk
+  finalizers:
+    - enterprise.splunk.com/delete-pvc
+spec:
+  enableDFS: true
+  #  storageClassName: nfs-k8s-retain 
+  resources:
+    splunkVarStorage: 20Gi
+    splunkIndexerStorage: 30Gi
+  splunkVolumes:
+  - name: defaults
+    configMap:
+      name: splunk-defaults
+  - name: apps
+    configMap:
+      name: splunk-apps
+  - name: licenses
+    configMap:
+      name: splunk-licenses
+  topology:
+    indexers: 3
+    searchHeads: 1 
+    sparkWorkers: 3
+  licenseUrl: /mnt/licenses/Splunk_Enterprise_NFR_Q1FY21.lic 
+  defaultsUrl: /mnt/defaults/default.yml
+  defaults: |-
+    splunk:
+      password: Pl@tano6
+      apps_location:
+        - "/mnt/apps/web.tgz"
