@@ -1,0 +1,11 @@
+********INSTALL KIND********
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.7.0/kind-$(uname)-amd64
+chmod +x ./kind
+mv ./kind /usr/local/bin
+
+
+
+*****INSTALL HELM******
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
