@@ -1,3 +1,0 @@
-[]
-export = none
-access = read : [ admin ], write : [ admin ]
