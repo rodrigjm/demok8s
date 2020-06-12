@@ -1,45 +1,44 @@
 ****AWS prep****
-create user
-provide "AdministratorAccess" permissions
-create programatic access
--- download csv with credentials
+  create user using IAM
+  provide "AdministratorAccess" permissions in group
+  create programatic access
+    download csv with credentials
+
+****EC2******
+  Spin up lightwight Micro instance of amazon linux
+  ssh w/ pem
+    install git
+      sudo yum -y update
+      sudo yum -y install git
+    Download Repo for files/manifest/instructions
+      git clone https://github.com/rodrigjm/demok8s.git
 
 
+*****EKS****
+  Once you ssh in -- go thru set of commands below:
+    aws configure
+      enter credentials from csv you download -- including key/secret/us-east-1/json
+	AWS Access Key ID [********************]:
+	AWS Secret Access Key [********************]:
+	Default region name [us-east-1]:
+	Default output format [json]:
+    aws version
+      to test aws CLI
+    download Kubectl: -- used to interface w/ kubernetes cluster/control plane
+      curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl
+      chmod +x ./kubectl
+      mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      kubectl version --short --client
+    Download eksctl:  -- used to interface with AWS EKS API
+      curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+      sudo mv /tmp/eksctl /usr/local/bin
+      eksctl version
+    Create first cluster (2 node cluster w/ t3.medium EC2 & v. 1.16 of kubernetes:  
+      eksctl create cluster  --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 4
+		**sometimes due to availability, you will have to explicitly define AZ via --zones switch [--zones us-east-1a,us-east-1b]
+      You can verify creation by going to CloudFormation in AWS console
+	****will take 10-15 minutes****
+      kubectl get po -A 
 
 
-****EKS******
-
-
-  ***either spin up lightwight Micro instance of amazon linux OR install AWS cli*****
-
-
-
-
-  aws configure
----- enter api/secret/us-east-1/json
-  aws s3 ls
-  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl
-  chmod +x ./kubectl
-  mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-  kubectl version --short --client
-  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-  sudo mv /tmp/eksctl /usr/local/bin
-  eksctl version
-  eksctl create cluster --name prod1 --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 4
-  kubectl get po -A
-
-
-
-
-
-
-
-
-*****INSTALL HELM******
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
-helm repo update
-
+Congrats, you have spun up kubernetes Cluster

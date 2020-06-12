@@ -2,16 +2,29 @@ https://github.com/splunk/splunk-operator
 
 ****INSTALL SPLK OPERATOR****
 
-kubectl apply -f http://tiny.cc/splunk-operator-install
+	kubectl apply -f http://tiny.cc/splunk-operator-install
 
 
 *****upload app to configmap****
-kubectl create configmap splunk-apps --from-file=eksdemo.tar.gz
+	kubectl create configmap splunk-apps --from-file=eksdemo.tgz
 
 
 ***deploy standalone Splunk w/ app*** 
-kubectl apply -f s1.yaml
+	kubectl apply -f s1.yaml
 
 ****expose service for access to splunk web and HEC****
-kubectl apply -f svc.yaml
+	kubectl apply -f svc.yaml
+	kubectl get svc
+		check loadbalancer hostname
+	kubectl describe svc splunk-s1-apps
+		ensure endpoints are posted
+	wait until hostname resolution distributes
+		go to $ELB_hostname$:8000
+
+***get admin password***
+kubectl get secret splunk-s1-apps-test-standalone-secrets -o jsonpath='{.data.password}' | base64 --decode
+
+
+
+
 
