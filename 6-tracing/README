@@ -1,0 +1,8 @@
+*****deploy microservices demo****
+kubectl create ns sock-shop
+kubectl apply -f sock-shop.yaml
+
+--retreive LB host
+kubectl get svc -n sock-shop 
+
+

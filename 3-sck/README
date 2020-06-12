@@ -1,0 +1,22 @@
+https://github.com/splunk/splunk-connect-for-kubernetes
+
+
+
+*****INSTALL HELM******
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo update
+
+
+
+****INSTALL SCK 1.4.1*****
+kubectl create ns sck
+
+review sck.yaml for additional parameters
+helm install sck -n sck -f sck.yaml splunk-connect-for-kubernetes-1.4.1.tgz 
+
+
+kubectl get po -n sck 

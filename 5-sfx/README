@@ -1,0 +1,26 @@
+https://signalfx.github.io/observability-workshop/latest/smartagent/prep/
+https://github.com/signalfx/app-dev-workshop
+
+***create free trial of SFX****
+
+configure api key integration
+
+****install SFX chart****
+
+helm repo add signalfx https://dl.signalfx.com/helm-repo
+
+helm repo update
+
+
+helm install \
+--set signalFxAccessToken=xxxxx \
+--set clusterName=test_cluster \
+--set kubeletAPI.url=https://127.0.0.1:10250  \
+--set signalFxRealm=us1  \
+--set agentVersion=5.1.1 \
+--set traceEndpointUrl=https://ingest.us1.signalfx.com/v2/trace \
+--set gatherDockerMetrics=false \
+signalfx-agent signalfx/signalfx-agent \
+-f workshop/k3s/values.yaml
+
+

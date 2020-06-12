@@ -1,0 +1,16 @@
+[inputs/splunktcp%3A%2F%2F9997]
+owner = splunk-system-user
+version = 8.0.1
+modtime = 1588210535.631322000
+
+[inputs/tcp%3A%2F%2F1514]
+owner = admin
+version = 8.0.1
+modtime = 1588210568.149502000
+
+[savedsearches/t4est]
+access = read : [ * ], write : [ * ]
+export = system
+owner = admin
+version = 8.0.1
+modtime = 1589896276.535449000

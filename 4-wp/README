@@ -1,0 +1,6 @@
+****INSTALL wordpress****
+kubectl create ns wp
+helm install wp -n wp -f wp-values stable/wordpress
+
+kubectl get svc -n wp 
+    retrieve LB hostname
