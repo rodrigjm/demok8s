@@ -21,8 +21,8 @@ https://github.com/splunk/splunk-operator
 	wait until hostname resolution distributes
 		go to $ELB_hostname$:8000
 
-***get admin password***
-kubectl get secret splunk-s1-apps-test-standalone-secrets -o jsonpath='{.data.password}' | base64 --decode
+***get admin password to login***
+        kubectl get secret splunk-s1-apps-test-standalone-secrets -o jsonpath='{.data.password}' | base64 --decode
 
 
 

@@ -7,18 +7,18 @@ global:
       insecureSSL: true 
 #      host: sh.beepbeepboop.org
 #      token: fcf52456-84c8-4524-970a-958e75f45a2f
-      host: 10.0.0.210 
-      token: 1b0d7472-36e4-4984-9666-5aca6e6bc1eb 
+      host: splunk-s1-apps 
+      token: 00000000-0000-0000-0000-000000000000 
       port: 8088
 
 #local config for logging chart
 splunk-kubernetes-logging:
   kubernetes:
-    clusterName: kind_cluster 
+    clusterName: eks_cluster 
   journalLogPath: /run/log/journal
   splunk:
     hec:
-      indexName: em_logs
+      indexName: eks_logs
 
 #local config for objects chart
 splunk-kubernetes-objects:
@@ -29,7 +29,7 @@ splunk-kubernetes-objects:
     name: splunk-kubernetes-objects
   kubernetes:
     insecureSSL: true
-    clusterName: kind_cluster 
+    clusterName: eks_cluster 
   objects:
     core:
       v1:
@@ -39,7 +39,7 @@ splunk-kubernetes-objects:
         [{"name":"daemon_sets", "interval":"60s"},{"name":"deployments", "interval":"60s"},{"name":"replica_sets", "interval":"60s"},{"name":"stateful_sets", "interval":"60s"},]
   splunk:
     hec:
-      indexName: em_meta
+      indexName: eks_meta
 
 #local config for metrics chart
 splunk-kubernetes-metrics:
@@ -49,7 +49,7 @@ splunk-kubernetes-metrics:
     kubeletPort: 10250
     useRestClientSSL: true
     insecureSSL: true
-    clusterName: kind_cluster 
+    clusterName: eks_cluster 
   rbac:
     create: true
   serviceAccount:
@@ -57,4 +57,4 @@ splunk-kubernetes-metrics:
     name: splunk-kubernetes-metrics
   splunk:
     hec:
-      indexName: em_metrics
+      indexName: eks_metrics

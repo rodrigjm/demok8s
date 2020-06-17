@@ -1,0 +1,25 @@
+***sign up for gremlin account***
+
+
+***install gremlin****
+
+
+
+TEAMID= 858aba48-cef3-5f98-97c7-1b95acd0bca9
+secret= 4d1a558a-4861-4400-9a55-8a48614400c8
+
+
+
+helm repo add gremlin https://helm.gremlin.com
+
+
+kubectl create namespace gremlin
+
+
+helm install gremlin gremlin/gremlin \
+    -n gremlin \
+    --set gremlin.secret.managed=true \
+    --set gremlin.secret.type=secret \
+    --set gremlin.secret.teamID=858aba48-cef3-5f98-97c7-1b95acd0bca9 \
+    --set gremlin.secret.clusterID=eks_cluster \ 
+    --set gremlin.secret.teamSecret=c4543b4d-a035-4c7a-943b-4da035ac7ac3 
