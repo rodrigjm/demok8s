@@ -13,4 +13,4 @@ spec:
   defaults: |-
     splunk:
       apps_location:
-        - "/mnt/apps/bootstrap.tgz"
+        - "/mnt/apps/eksdemo.tgz"
