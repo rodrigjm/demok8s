@@ -5,3 +5,9 @@ Let's deploy a website.
 ****install sock-shop****
 kubectl create ns sock-shop
 kubectl apply -f deployment.yaml
+
+
+
+
+*** on docker machine (somewhere) generate load***
+docker run --net=host weaveworksdemos/load-test -h localhost -r 100 -c 2

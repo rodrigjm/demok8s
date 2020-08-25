@@ -6,25 +6,25 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/affinity: cookie
     #nginx.ingress.kubernetes.io/rewrite-target: / 
-    certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
+    #certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-  - host: s1.beepbeepboop.me
+  - host: s1.beepbeepboop.org 
     http:
       paths:
       - backend:
-          serviceName: splunk 
+          serviceName: splunk-s1-apps 
           servicePort: 8000
   - host: hec.beepbeepboop.me
     http:
       paths:
       - backend:
-          serviceName: splunk 
+          serviceName: splunk-s1-apps
           servicePort: 8088
-  tls:
-  - hosts:
+#  tls:
+ # - hosts:
           #    - sh.beepbeepboop.me
           #    - hec.beepbeepboop.me
           #    - cm.beepbeepboop.me
-      - s1.beepbeepboop.me
-    secretName: beepbeepboopme-tls
+    #  - s1.beepbeepboop.me
+    #secretName: beepbeepboopme-tls

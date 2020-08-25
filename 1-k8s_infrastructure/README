@@ -37,7 +37,7 @@
       +sudo mv /tmp/eksctl /usr/local/bin
       +eksctl version
     ~Create first cluster (2 node cluster w/ t3.medium EC2 & v. 1.16 of kubernetes:  
-      +eksctl create cluster  --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 4
+      +eksctl create cluster --asg-access --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 1 --nodes-min 1 --nodes-max 4
          ~sometimes due to availability, you will have to explicitly define AZ via --zones switch [--zones us-east-1a,us-east-1b]
     ~You can verify creation by going to CloudFormation in AWS console
 	****will take 10-15 minutes****
