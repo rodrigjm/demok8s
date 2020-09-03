@@ -5,12 +5,8 @@ global:
     hec:
       protocol: https
       insecureSSL: true 
-      host: itsi.beepbeepboop.org
-      #DSP token
-      token: 45e51096-ed3a-435f-92d9-392928b1e83f
-#      token: fcf52456-84c8-4524-970a-958e75f45a2f
-      #host: splunk-s1-apps 
-      #token: 00000000-0000-0000-0000-000000000000 
+      host: splunk-s1-apps 
+      token: 00000000-0000-0000-0000-000000000000 
       port: 8088
 
 #local config for logging chart

@@ -19,6 +19,7 @@
       +git clone https://github.com/rodrigjm/demok8s.git
 
 
+
 *****EKS****
   Once you ssh in -- go thru set of commands below:
     +aws configure
@@ -42,6 +43,5 @@
     ~You can verify creation by going to CloudFormation in AWS console
 	****will take 10-15 minutes****
       +kubectl get po -A 
-
 
 Congrats, you have spun up kubernetes Cluster
